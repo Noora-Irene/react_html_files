@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React exercise 5</title>
+  </head>
+  <body>
+    <!-- Root container for react components -->
+    <div id='root'></div>
+ 
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+
+    <script type="text/babel">
+    
+    function CheckAge() {
+
+      const [person, setValues] = 
+        React.useState({name: '', age: ''});
+
+      const [msg, setMsg] = React.useState('');
+
+      const inputChanged = (event) => {
+        setValues({ ...person, [event.target.name]: event.target.value });
+    }
+
+      const checkAge = (event) => {
+
+        if (person.age >= 18) {
+            setMsg('Hello ' + person.name);
+        } else {
+            setMsg('You are too young');
+      }
+  };
+
+      return (
+        <div>
+            {msg}<br /><br />
+
+            Name: <input type="text" name="name" value={person.name} onChange={ inputChanged } /><br />
+            Age:  <input type="text" name="age" value={person.age} onChange={ inputChanged } /><br />
+        
+                  <input type="submit" value="Submit" onClick={() => checkAge()} />
+        </div>
+    );
+  };
+
+        ReactDOM.render(<CheckAge />, document.getElementById('root'));
+
+    </script>
+  </body>
+  </html>
