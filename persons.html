@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+   <meta charset="utf-8">
+   <title>Persons list</title>
+</head>
+
+<body>
+   <div id='root'></div>
+   <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+   <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+   <script type="text/babel">
+
+      function PersonList() {
+
+         const [listItems, setListItems] = React.useState([]);
+
+         React.useEffect(() => {
+            fetch('https://reqres.in/api/users')
+               .then(response => response.json())
+               .then(data => {
+                  setListItems(data.data)
+               })
+               .catch(err => console.error(err))
+         }, [])
+
+         const itemRows = listItems.map((person) =>
+            <tr key={person.id}>
+               <td>{person.first_name}</td>
+               <td>{person.last_name}</td>
+               <td>{person.email}</td>
+               <td>
+                  <div>
+                     <img align='middle' src={person.avatar} alt='Person image' />
+                  </div>
+               </td>
+            </tr>
+         )
+
+         return (
+            <div>
+               <h2>Persons</h2>
+               <table>
+                  <body>
+                     <tr>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
+                        <th></th>
+                     </tr>
+                     {itemRows}
+                  </body>
+               </table>
+            </div>
+         );
+      }
+
+      ReactDOM.render(<PersonList />, document.getElementById('root'));
+   </script>
+</body>
+
+</html>
