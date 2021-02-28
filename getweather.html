@@ -22,7 +22,7 @@
          const [isntLoaded, setLoaded] = React.useState(false);
 
          React.useEffect(() => {
-            fetch('http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=5e434882877f259666d48e74127890ec')
+            fetch('http://api.openweathermap.org/data/2.5/weather?q=London&units=metric&APPID=yourappid')
                .then(response => response.json())
                .then(responseData => {
                   setTemp(responseData.main.temp.toFixed(0));
